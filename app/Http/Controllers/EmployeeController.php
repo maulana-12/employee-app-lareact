@@ -77,12 +77,16 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Employee $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Employee $employee)
     {
-        //
+        try {
+            $employee->delete();
+        } catch (Exception $e) {
+            Log::error($e);
+        }
     }
 
 
@@ -105,6 +109,30 @@ class EmployeeController extends Controller
         try {
             $employeeData = Employee::findOrFail($request->get('employeeId'));
             return response()->json($employeeData);
+        } catch (Exception $e) {
+            Log::error($e);
+        }
+    }
+
+    /**
+     * Update employee data.
+     */
+    public function updateEmployeeData(Request $request)
+    {
+        try {
+            $employeeId = $request->get('employeeId');
+            $employeeName = $request->get('employeeName');
+            $employeeSalary = $request->get('employeeSalary');
+
+            Employee::where('id', $employeeId)->update([
+                'name' => $employeeName,
+                'salary' => $employeeSalary
+            ]);
+
+            return response()->json([
+                'name' => $employeeName,
+                'salary' => $employeeSalary
+            ]);
         } catch (Exception $e) {
             Log::error($e);
         }
