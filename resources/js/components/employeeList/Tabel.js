@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import TabelRow from './TabelRow';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CreateModal from './Modals/CreateModal';
 
 class Tabel extends Component {
     constructor(props) {
@@ -33,6 +34,7 @@ class Tabel extends Component {
         return (
             <div className="container">
                 <ToastContainer />
+                <CreateModal />
                 <div className="row justify-content-center">
                     <div className="col-md-8">
                         <div className="card">

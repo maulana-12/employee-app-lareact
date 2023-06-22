@@ -49,7 +49,7 @@ class TabelActionButtons extends Component {
                     data-bs-toggle="modal"
                     data-bs-target={'#deleteModal' + this.props.eachRowId}
                     onClick={() => { this.getEmployeeDetails(this.props.eachRowId) }}
-                >Update</button>
+                >Delete</button>
                 <DeleteModal modalId={this.props.eachRowId} employeeData={this.state} />
             </div>
         )

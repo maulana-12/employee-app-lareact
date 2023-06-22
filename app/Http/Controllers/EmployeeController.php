@@ -37,7 +37,22 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $employeeName = $request->get('employeeName');
+            $employeeSalary = $request->get('employeeSalary');
+
+            Employee::create([
+                'name' => $employeeName,
+                'salary' => $employeeSalary
+            ]);
+
+            return response()->json([
+                'name' => $employeeName,
+                'salary' => $employeeSalary
+            ]);
+        } catch (Exception $e) {
+            Log::error($e);
+        }
     }
 
     /**
